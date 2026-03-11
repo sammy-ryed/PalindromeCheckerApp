@@ -242,6 +242,32 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : \"" + uc10Input + "\" is NOT a Palindrome.");
         }
+
+        // UC11 - OOP Encapsulated Palindrome Check
+        PalindromeChecker checker = new PalindromeChecker();
+        String uc11Input = "kayak";
+
+        System.out.println("\n--- UC11: OOP Encapsulated Palindrome Check ---");
+        System.out.println("Input  : " + uc11Input);
+        System.out.println("Result : " + checker.checkPalindrome(uc11Input));
+    }
+
+    // UC11 - PalindromeChecker class (Encapsulation + Single Responsibility)
+    static class PalindromeChecker {
+        public String checkPalindrome(String word) {
+            char[] chars = word.toCharArray();
+            int left = 0;
+            int right = chars.length - 1;
+
+            while (left < right) {
+                if (chars[left] != chars[right]) {
+                    return "\"" + word + "\" is NOT a Palindrome.";
+                }
+                left++;
+                right--;
+            }
+            return "\"" + word + "\" is a Palindrome.";
+        }
     }
 
     // UC9 - Recursive helper method
