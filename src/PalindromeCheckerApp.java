@@ -250,6 +250,18 @@ public class PalindromeCheckerApp {
         System.out.println("\n--- UC11: OOP Encapsulated Palindrome Check ---");
         System.out.println("Input  : " + uc11Input);
         System.out.println("Result : " + checker.checkPalindrome(uc11Input));
+
+        // UC12 - Strategy Pattern: Dynamic Algorithm Selection
+        String uc12Input = "repaper";
+
+        System.out.println("\n--- UC12: Strategy Pattern Palindrome Check ---");
+        System.out.println("Input  : " + uc12Input);
+
+        PalindromeStrategy stackStrategy = new StackStrategy();
+        PalindromeStrategy dequeStrategy = new DequeStrategy();
+
+        System.out.println("[StackStrategy]  Result : " + (stackStrategy.check(uc12Input) ? "\"" + uc12Input + "\" is a Palindrome." : "\"" + uc12Input + "\" is NOT a Palindrome."));
+        System.out.println("[DequeStrategy]  Result : " + (dequeStrategy.check(uc12Input) ? "\"" + uc12Input + "\" is a Palindrome." : "\"" + uc12Input + "\" is NOT a Palindrome."));
     }
 
     // UC11 - PalindromeChecker class (Encapsulation + Single Responsibility)
@@ -290,6 +302,42 @@ public class PalindromeCheckerApp {
         Node(char data) {
             this.data = data;
             this.next = null;
+        }
+    }
+
+    // UC12 - Strategy Interface
+    interface PalindromeStrategy {
+        boolean check(String input);
+    }
+
+    // UC12 - Stack Strategy (LIFO)
+    static class StackStrategy implements PalindromeStrategy {
+        public boolean check(String input) {
+            Stack<Character> stack = new Stack<>();
+            for (int i = 0; i < input.length(); i++) {
+                stack.push(input.charAt(i));
+            }
+            String reversed = "";
+            while (!stack.isEmpty()) {
+                reversed = reversed + stack.pop();
+            }
+            return input.equals(reversed);
+        }
+    }
+
+    // UC12 - Deque Strategy (Double Ended Queue)
+    static class DequeStrategy implements PalindromeStrategy {
+        public boolean check(String input) {
+            Deque<Character> deque = new ArrayDeque<>();
+            for (int i = 0; i < input.length(); i++) {
+                deque.addLast(input.charAt(i));
+            }
+            while (deque.size() > 1) {
+                if (deque.removeFirst() != deque.removeLast()) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
