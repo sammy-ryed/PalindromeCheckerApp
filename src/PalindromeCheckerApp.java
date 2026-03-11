@@ -199,6 +199,31 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : \"" + uc8Input + "\" is NOT a Palindrome.");
         }
+
+        // UC9 - Recursive Palindrome Check
+        String uc9Input = "refer";
+        boolean uc9IsPalindrome = isPalindromeRecursive(uc9Input, 0, uc9Input.length() - 1);
+
+        System.out.println("\n--- UC9: Recursive Palindrome Check ---");
+        System.out.println("Input  : " + uc9Input);
+
+        if (uc9IsPalindrome) {
+            System.out.println("Result : \"" + uc9Input + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result : \"" + uc9Input + "\" is NOT a Palindrome.");
+        }
+    }
+
+    // UC9 - Recursive helper method
+    static boolean isPalindromeRecursive(String str, int start, int end) {
+        // Base condition: single char or pointers crossed
+        if (start >= end) {
+            return true;
+        }
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+        return isPalindromeRecursive(str, start + 1, end - 1);
     }
 
     // Node class for Singly Linked List (UC8)
