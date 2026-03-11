@@ -212,6 +212,36 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : \"" + uc9Input + "\" is NOT a Palindrome.");
         }
+
+        // UC10 - Case and Space Insensitive Palindrome Check
+        String uc10Input = "A man a plan a canal Panama";
+
+        // Normalize: remove non-alphanumeric characters and convert to lowercase
+        String normalized = uc10Input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        // Two-pointer check on normalized string
+        int uc10Left = 0;
+        int uc10Right = normalized.length() - 1;
+        boolean uc10IsPalindrome = true;
+
+        while (uc10Left < uc10Right) {
+            if (normalized.charAt(uc10Left) != normalized.charAt(uc10Right)) {
+                uc10IsPalindrome = false;
+                break;
+            }
+            uc10Left++;
+            uc10Right--;
+        }
+
+        System.out.println("\n--- UC10: Case and Space Insensitive Palindrome Check ---");
+        System.out.println("Input      : " + uc10Input);
+        System.out.println("Normalized : " + normalized);
+
+        if (uc10IsPalindrome) {
+            System.out.println("Result : \"" + uc10Input + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result : \"" + uc10Input + "\" is NOT a Palindrome.");
+        }
     }
 
     // UC9 - Recursive helper method
