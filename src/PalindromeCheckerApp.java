@@ -1,3 +1,5 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -114,6 +116,31 @@ public class PalindromeCheckerApp {
             System.out.println("Result : \"" + uc6Input + "\" is a Palindrome.");
         } else {
             System.out.println("Result : \"" + uc6Input + "\" is NOT a Palindrome.");
+        }
+
+        // UC7 - Deque Based Optimized Palindrome Check
+        String uc7Input = "rotator";
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < uc7Input.length(); i++) {
+            deque.addLast(uc7Input.charAt(i));
+        }
+
+        boolean uc7IsPalindrome = true;
+        while (deque.size() > 1) {
+            if (deque.removeFirst() != deque.removeLast()) {
+                uc7IsPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("\n--- UC7: Deque Based Optimized Palindrome Check ---");
+        System.out.println("Input  : " + uc7Input);
+
+        if (uc7IsPalindrome) {
+            System.out.println("Result : \"" + uc7Input + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result : \"" + uc7Input + "\" is NOT a Palindrome.");
         }
     }
 }
