@@ -37,5 +37,30 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : \"" + input + "\" is NOT a Palindrome.");
         }
+
+        // UC4 - Character Array Based Palindrome Check (Two-Pointer)
+        String uc4Input = "level";
+        char[] chars = uc4Input.toCharArray();
+        int left = 0;
+        int right = chars.length - 1;
+        boolean isPalindrome = true;
+
+        while (left < right) {
+            if (chars[left] != chars[right]) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+
+        System.out.println("\n--- UC4: Character Array Based Palindrome Check ---");
+        System.out.println("Input  : " + uc4Input);
+
+        if (isPalindrome) {
+            System.out.println("Result : \"" + uc4Input + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result : \"" + uc4Input + "\" is NOT a Palindrome.");
+        }
     }
 }
