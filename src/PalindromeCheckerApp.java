@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
         // UC1 - Application Entry & Welcome Message
@@ -61,6 +63,28 @@ public class PalindromeCheckerApp {
             System.out.println("Result : \"" + uc4Input + "\" is a Palindrome.");
         } else {
             System.out.println("Result : \"" + uc4Input + "\" is NOT a Palindrome.");
+        }
+
+        // UC5 - Stack Based Palindrome Check
+        String uc5Input = "deified";
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < uc5Input.length(); i++) {
+            stack.push(uc5Input.charAt(i));
+        }
+
+        String uc5Reversed = "";
+        while (!stack.isEmpty()) {
+            uc5Reversed = uc5Reversed + stack.pop();
+        }
+
+        System.out.println("\n--- UC5: Stack Based Palindrome Check ---");
+        System.out.println("Input  : " + uc5Input);
+
+        if (uc5Input.equals(uc5Reversed)) {
+            System.out.println("Result : \"" + uc5Input + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result : \"" + uc5Input + "\" is NOT a Palindrome.");
         }
     }
 }
