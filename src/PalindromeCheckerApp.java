@@ -142,5 +142,73 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("Result : \"" + uc7Input + "\" is NOT a Palindrome.");
         }
+
+        // UC8 - Singly Linked List Based Palindrome Check
+        String uc8Input = "noon";
+
+        // Build linked list from string
+        Node head = null;
+        Node tail = null;
+        for (int i = 0; i < uc8Input.length(); i++) {
+            Node newNode = new Node(uc8Input.charAt(i));
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+        // Find middle using fast and slow pointer
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Reverse second half in-place
+        Node prev = null;
+        Node curr = slow;
+        while (curr != null) {
+            Node nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+
+        // Compare first half and reversed second half
+        Node left = head;
+        Node right = prev;
+        boolean uc8IsPalindrome = true;
+        while (right != null) {
+            if (left.data != right.data) {
+                uc8IsPalindrome = false;
+                break;
+            }
+            left = left.next;
+            right = right.next;
+        }
+
+        System.out.println("\n--- UC8: Singly Linked List Based Palindrome Check ---");
+        System.out.println("Input  : " + uc8Input);
+
+        if (uc8IsPalindrome) {
+            System.out.println("Result : \"" + uc8Input + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result : \"" + uc8Input + "\" is NOT a Palindrome.");
+        }
+    }
+
+    // Node class for Singly Linked List (UC8)
+    static class Node {
+        char data;
+        Node next;
+
+        Node(char data) {
+            this.data = data;
+            this.next = null;
+        }
     }
 }
