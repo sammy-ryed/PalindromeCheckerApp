@@ -262,6 +262,63 @@ public class PalindromeCheckerApp {
 
         System.out.println("[StackStrategy]  Result : " + (stackStrategy.check(uc12Input) ? "\"" + uc12Input + "\" is a Palindrome." : "\"" + uc12Input + "\" is NOT a Palindrome."));
         System.out.println("[DequeStrategy]  Result : " + (dequeStrategy.check(uc12Input) ? "\"" + uc12Input + "\" is a Palindrome." : "\"" + uc12Input + "\" is NOT a Palindrome."));
+
+        // UC13 - Performance Comparison of Palindrome Algorithms
+        String uc13Input = "amanaplanacanalpanama";
+
+        System.out.println("\n--- UC13: Performance Comparison of Palindrome Algorithms ---");
+        System.out.println("Input  : " + uc13Input);
+        System.out.println();
+
+        // Approach 1: String reversal using StringBuilder
+        long start1 = System.nanoTime();
+        String rev = new StringBuilder(uc13Input).reverse().toString();
+        boolean result1 = uc13Input.equals(rev);
+        long end1 = System.nanoTime();
+        System.out.println("Approach 1 - StringBuilder Reverse : " + (result1 ? "Palindrome" : "Not Palindrome") + " | Time: " + (end1 - start1) + " ns");
+
+        // Approach 2: For loop string concatenation
+        long start2 = System.nanoTime();
+        String revLoop = "";
+        for (int i = uc13Input.length() - 1; i >= 0; i--) {
+            revLoop = revLoop + uc13Input.charAt(i);
+        }
+        boolean result2 = uc13Input.equals(revLoop);
+        long end2 = System.nanoTime();
+        System.out.println("Approach 2 - For Loop Concatenation : " + (result2 ? "Palindrome" : "Not Palindrome") + " | Time: " + (end2 - start2) + " ns");
+
+        // Approach 3: Two-pointer char array
+        long start3 = System.nanoTime();
+        char[] ch = uc13Input.toCharArray();
+        int l = 0, r = ch.length - 1;
+        boolean result3 = true;
+        while (l < r) {
+            if (ch[l] != ch[r]) { result3 = false; break; }
+            l++; r--;
+        }
+        long end3 = System.nanoTime();
+        System.out.println("Approach 3 - Two-Pointer Char Array : " + (result3 ? "Palindrome" : "Not Palindrome") + " | Time: " + (end3 - start3) + " ns");
+
+        // Approach 4: Stack-based
+        long start4 = System.nanoTime();
+        Stack<Character> perfStack = new Stack<>();
+        for (int i = 0; i < uc13Input.length(); i++) perfStack.push(uc13Input.charAt(i));
+        String revStack = "";
+        while (!perfStack.isEmpty()) revStack = revStack + perfStack.pop();
+        boolean result4 = uc13Input.equals(revStack);
+        long end4 = System.nanoTime();
+        System.out.println("Approach 4 - Stack Reversal        : " + (result4 ? "Palindrome" : "Not Palindrome") + " | Time: " + (end4 - start4) + " ns");
+
+        // Approach 5: Deque-based
+        long start5 = System.nanoTime();
+        Deque<Character> perfDeque = new ArrayDeque<>();
+        for (int i = 0; i < uc13Input.length(); i++) perfDeque.addLast(uc13Input.charAt(i));
+        boolean result5 = true;
+        while (perfDeque.size() > 1) {
+            if (perfDeque.removeFirst() != perfDeque.removeLast()) { result5 = false; break; }
+        }
+        long end5 = System.nanoTime();
+        System.out.println("Approach 5 - Deque Front/Rear      : " + (result5 ? "Palindrome" : "Not Palindrome") + " | Time: " + (end5 - start5) + " ns");
     }
 
     // UC11 - PalindromeChecker class (Encapsulation + Single Responsibility)
