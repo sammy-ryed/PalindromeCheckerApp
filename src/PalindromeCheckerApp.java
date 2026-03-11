@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class PalindromeCheckerApp {
@@ -85,6 +87,33 @@ public class PalindromeCheckerApp {
             System.out.println("Result : \"" + uc5Input + "\" is a Palindrome.");
         } else {
             System.out.println("Result : \"" + uc5Input + "\" is NOT a Palindrome.");
+        }
+
+        // UC6 - Queue vs Stack: FIFO vs LIFO Palindrome Check
+        String uc6Input = "civic";
+        Queue<Character> queue = new LinkedList<>();
+        Stack<Character> uc6Stack = new Stack<>();
+
+        for (int i = 0; i < uc6Input.length(); i++) {
+            queue.add(uc6Input.charAt(i));      // Enqueue (FIFO)
+            uc6Stack.push(uc6Input.charAt(i));  // Push (LIFO)
+        }
+
+        boolean uc6IsPalindrome = true;
+        while (!queue.isEmpty()) {
+            if (queue.poll() != uc6Stack.pop()) {  // Dequeue vs Pop
+                uc6IsPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("\n--- UC6: Queue vs Stack (FIFO vs LIFO) Palindrome Check ---");
+        System.out.println("Input  : " + uc6Input);
+
+        if (uc6IsPalindrome) {
+            System.out.println("Result : \"" + uc6Input + "\" is a Palindrome.");
+        } else {
+            System.out.println("Result : \"" + uc6Input + "\" is NOT a Palindrome.");
         }
     }
 }
